@@ -1,14 +1,14 @@
 # should return 9 size array with data
+# @param - index:[a,b] where a ranges 0-27 and b 0-2
+# @param - data: 1d array of square objects
 def getRowData(index,data):
     rowData = []
     rowNum = int(index[0] / 3)
-    rowData.append(data[(rowNum*9):(rowNum*9)+8])
-    #print (rowNum)
-    #if(rowNum == 1):
-     #   rowData.append(data[0:8])
-    #if(rowNum == 2):
-     #   rowData.append(data[9:17])
-    print(rowData)
+    print('index:'+str(index[0]) + ', ' + str(index[1]) +' row number:'+ str(rowNum))
+    rowData.append(data[(rowNum*9):(rowNum*9)+9])
+    for i in range(9):
+        print(rowData[0][i].value)
+    rowData = 
     return rowData
 
 def getColumnData(index,data):
@@ -50,7 +50,7 @@ class Grid:
         # - trim suspects 
         self.suspectListCount = self.suspectListCount(self.squares)
         self.trimSuspects(self.squares)
-# call method to trim the suspect lists - pass in object of t-zone data
+        # call method to trim the suspect lists - pass in object of t-zone data
 
 
         #print(self.suspectListCount)
@@ -80,10 +80,11 @@ class Grid:
         for i in range(81):
             t_zone = []
             if(squares[i].suspectlist != None):
+                # pass in index and 1d squares data
+                # get back an array with all squares inside of this values row
                 getRowData(squares[i].index, squares)
                 #getColumnData(squares[i].index)
                 #getBoxData(squares[i].index)
-            print()
 
 
 
