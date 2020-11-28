@@ -6,6 +6,7 @@ class Square:
         self.suspectList = []
     def __str__(self):
         return str(self.value)
+    
 
 
 class Grid:
