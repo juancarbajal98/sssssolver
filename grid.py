@@ -1,6 +1,6 @@
 # class structure - super being grid, sub being square
 
-import Tkinter as Tk
+import tkinter as Tk
 #import numpy as np
 class Grid(object):
     def __init__(self,root,n):
@@ -32,10 +32,10 @@ class Grid(object):
             #self.w.itemconfigure(cubes[i], fill = 'orange')
         #self.w.bind('<Button-1>',self.squareclick)
         self.w.pack()
-    
+
 def knights_tour(n):
     root = Tk.Tk() # root
     game = Grid(root,n)
     root.mainloop()
 if __name__=='__main__':
-    knights_tour(9)   
+    knights_tour(9)
