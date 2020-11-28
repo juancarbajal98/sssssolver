@@ -2,8 +2,6 @@
 import math
 import numpy as np
 
-global mat
-
 def mat_print(in_mat):
 	for i in range(len(in_mat)):
 		print(in_mat[i], end=" ")
@@ -83,20 +81,48 @@ def checksum(in_mat):
 		return 0
 
 
-class Box:
+class Grid:
+    # Node Initializer. Sets first node to carry data and sets pointer to next node
+	def __init__(self, data):
+		self.data = data
+		self.squares = []
 
-	def __init__(self, box):
-		self.box = box
+	def populate(self):
+		for i in range(len(self.data)):
+			s = Squares(i, self.data[i])
+			self.squares.append(s)
 
-	def printbox(self):
-		print('This box is: ', self.box)
+	def print(self):
+		for i in range(len(self.data)):
+			print(self.squares[i].value, end = " ")
+			if((i+1)%9 == 0):
+				print(' ')
+
+	def package(self):
+		out_mat = []
+
+		for i in range(self.data):
+			out_mat[i] = self.data[i]
+
+		return out_mat
 
 
-#reference
-b= Box('box1')
-b.printbox()
+class Squares:
+	def __init__(self, index, value):
+		self.index = index #int
+		self.value = value
+		self.suspectList = []
+
+	def addsus()
+
+
+
+
+
+
 
 ###########TESTING############
 mat = [	0, 0, 4, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 9, 2, 0, 6, 8, 0, 0, 0, 6, 0, 0, 7, 8, 0, 5, 9, 5, 0, 0, 0, 3, 0, 0, 0, 2, 1, 3, 0, 5, 9, 0, 0, 8, 0, 0, 0, 5, 7, 0, 1, 6, 4, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 5, 0, 0]
-
-row_print(row_grab(mat,9), 1)
+g = Grid(mat)
+g.populate()
+g.print()
