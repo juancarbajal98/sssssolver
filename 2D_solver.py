@@ -13,6 +13,9 @@ puzzle = [
     ]
 
 s = Grid(puzzle)
+while(s.getUnsolvedCount() > 0):
+    s.trimSuspects()
+
 
 
 

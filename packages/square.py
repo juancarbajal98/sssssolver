@@ -6,11 +6,34 @@ class Square:
         self.index = index # [a,b]
         self.value = value 
         self.suspectlist = suspectlist
+        # {[rowdata],[columndata],[boxdata]}
         self.t_zone = []
 
     def __str__(self):
         return str(self.value)
 
     def setTzone(self,t_zone):
-        self.t_zone.append(t_zone) 
-        print(t_zone)
+        # enumerate thru param - feed into data field t zone
+        for i in range(len(t_zone)):
+            self.t_zone.append(t_zone[i]) 
+
+    def trimSuspect(self,val):
+        print('coords22:', self.index)
+        print('val: ', val)
+        self.suspectlist.remove(val)
+        print('self.suspectlist:', self.suspectlist)
+        print('coords:',self.index)
+        if (len(self.suspectlist) == 1):
+            self.value = self.suspectlist[0]
+            self.suspectlist = None
+    
+    def stripTzone(self):
+        # intilize a null list 
+        unique_list = [] 
+      
+        # traverse for all elements 
+        for x in self.t_zone: 
+            # check if exists in unique_list or not 
+            if x not in unique_list: 
+                unique_list.append(x) 
+        return unique_list
