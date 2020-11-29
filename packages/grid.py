@@ -82,16 +82,3 @@ class Grid:
                             self.squares[i].trimSuspect(j)
         # update # of unsolved
         self.unsolvedCount = self.setUnsolvedCount(self.squares)
-
-        # begin trim by removing own value from suspect list
-        #squares[i].suspectlist.remove(squares[i].value)
-        # right now we are trying to look for other occurences of 
-        # the value but failing to consider the already existent occurence
-        #for v in range(9):
-         #   for b in range(9):
-            # if any of the 9 values should be found anywhere in t zone
-            # they are removed from the suspect list
-            # - although this also looks for the squares value, it will never find it
-          #      if((t_zone["t_row"][b] == v) or (t_zone["t_col"][b] == v) or (t_zone["box"][b] == v)):
-           #         squares[i].suspectlist.remove(v)
-        #print(squares[i].suspectlist)

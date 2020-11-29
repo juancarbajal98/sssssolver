@@ -14,9 +14,9 @@ puzzle = [
 
 s = Grid(puzzle)
 while(s.getUnsolvedCount() > 0):
-    s.trimSuspects()
+    s.trimSuspects() # mess with master copy - can trim from an array of 9 every single time rather than a suspect list
 
-
+# have to reinitialize all the suspect lists before next iteration
 
 
 

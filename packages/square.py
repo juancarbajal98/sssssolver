@@ -18,14 +18,13 @@ class Square:
             self.t_zone.append(t_zone[i]) 
 
     def trimSuspect(self,val):
-        print('coords22:', self.index)
-        print('val: ', val)
         self.suspectlist.remove(val)
         print('self.suspectlist:', self.suspectlist)
         print('coords:',self.index)
         if (len(self.suspectlist) == 1):
             self.value = self.suspectlist[0]
             self.suspectlist = None
+            # update t_zone suspects 
     
     def stripTzone(self):
         # intilize a null list 
