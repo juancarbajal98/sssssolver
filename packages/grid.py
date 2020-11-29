@@ -1,18 +1,18 @@
 from .square import Square
 from .helpers.T_zone import (
-    getRow, getRowData, 
-    getColumn, getColumnData, 
+    getRow, getRowData,
+    getColumn, getColumnData,
     getBox, getBoxData)
 from .suspectList import SuspectList
 class Grid:
     def __init__(self,squares_2D):
-        # 1D array of Square objects 
+        # 1D array of Square objects
         self.squares = []
         # populate squares data field with data from 2d array
         self.populate(squares_2D)
         # once we populate squares we:
         # - get a (suspectlist != none) count
-        # - trim suspects 
+        # - trim suspects
         self.unsolvedCount = self.unsolvedCount(self.squares)
         self.setTzones(self.squares)
         self.trimSuspects(self.squares)
@@ -32,17 +32,17 @@ class Grid:
                     self.squares.append(Square([i,j],squares_2D[i][j]))
                 else:
                     self.squares.append(Square([i,j],squares_2D[i][j],SuspectList()))
-    
-    # returns the # of unsolved squares - i.e. those with value 0 
+
+    # returns the # of unsolved squares - i.e. those with value 0
     def unsolvedCount(self, squares):
-        count = 0 
+        count = 0
         for i in range(81):
             if(squares[i].value == 0):
                 count += 1
             else:
                 pass
         return count
-        
+
     def setTzones(self,squares):
         t_zones = []
         for i in range(81):
@@ -56,7 +56,7 @@ class Grid:
             t_column = []
             t_box = []
 
-            # for each square with valid suspect list: 
+            # for each square with valid suspect list:
             if(squares[i].suspectlist != None):
                 # get row data
                 rowData = getRowData(squares[i].index, squares)
@@ -69,7 +69,7 @@ class Grid:
                 for k in range(9):
                     t_column.append(columnData[0][k].value)
                 t_zone["t_column"]=t_column
-                
+
                 # get box data
                 boxData = getBoxData(squares[i].index, squares)
                 for l in range(9):
@@ -91,7 +91,7 @@ class Grid:
             t_column = []
             t_box = []
 
-            # for each square with valid suspect list: 
+            # for each square with valid suspect list:
             if(squares[i].suspectlist != None):
                 # get row data
                 rowData = getRowData(squares[i].index, squares)
@@ -104,17 +104,17 @@ class Grid:
                 for k in range(9):
                     t_column.append(columnData[0][k].value)
                 t_zone["t_column"]=t_column
-                
+
                 # get box data
                 boxData = getBoxData(squares[i].index, squares)
                 for l in range(9):
                     t_box.append(boxData[0][l].value)
                 t_zone["t_box"] =t_box
                 t_zones.append(t_zone)
-            
+
                 # begin trim by removing own value from suspect list
                 #squares[i].suspectlist.remove(squares[i].value)
-                # right now we are trying to look for other occurences of 
+                # right now we are trying to look for other occurences of
                 # the value but failing to consider the already existent occurence
                 #for v in range(9):
                  #   for b in range(9):

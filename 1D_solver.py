@@ -73,6 +73,8 @@ def box_grab(in_mat, num):
 			step = 0
 	return out_mat
 
+
+#takes grid, chooses RCB , then RCB #
 def checksum(in_mat, op, num):
 	temp_mat = []
 	if(op == 0):
@@ -91,13 +93,28 @@ def checksum(in_mat, op, num):
 	else:
 		return 0
 
+def missing(in_mat):
+	temp_mat = []
+
+	for i in range(1,10): #from i: 1 - 9
+		signal = 0
+		for j in range(len(in_mat)):
+			if in_mat[j] == i:
+				signal += 1
+
+		if signal == 0:
+			temp_mat.append(i)
+
+	return temp_mat
+
+
+
 
 class Grid:
     # Node Initializer. Sets first node to carry data and sets pointer to next node
 	def __init__(self, data):
 		self.data = data
 		self.squares = []
-		self.suspectList = None
 
 	def populate(self):
 		for i in range(len(self.data)):
@@ -118,32 +135,51 @@ class Grid:
 			out_mat.append(self.data[i])
 		return out_mat
 
-	def suslist(self):
+
+	def g_sum(self):
+		sum = 0
 		for i in range(len(self.data)):
-			sus_temp = []
+			sum += self.data[i]
+		return sum
+
+
+	def suslist(self):
+		#populate the the squares again with correct friend lists
+		for i in range(len(self.data)):
+			row_temp = []
+			col_temp = []
+			box_temp = []
+			neighbor = []
+
 			if self.data[i] == 0:
 				#check row, then column, then box
 				#in the future, keep the row temp since we on the same one...
-				sus_temp = row_grab(self.package(), int(i/9)+1)
+				row_temp = row_grab(self.package(), int(i/9)+1)
+				for j in range(len(row_temp)):
+					if row_temp[j] > 0:
+						#print(row_temp[j], end = " ")
+						neighbor.append(row_temp[j])
 
-				for j in range(len(sus_temp)):
-					print(sus_temp[j], end = " ")
-				print(" ")
+				col_temp = col_grab(self.package(), (i+1) % 9)
+				for j in range(len(col_temp)):
+					if col_temp[j] > 0:
+						#print(col_temp[j], end = " ")
+						neighbor.append(col_temp[j])
+				#print("Finished printing column")
 
-				sus_temp = col_grab(self.package(), (i+1) % 9)
-				for j in range(len(sus_temp)):
-					print(sus_temp[j], end = " ")
-				print(" ")
+				box_temp = box_grab(self.package(), int(i/27)*3 + (int(i/3)%3)+1)
+				for j in range(len(box_temp)):
+					if box_temp[j] > 0:
+						#print(box_temp[j], end = " ")
+						neighbor.append(box_temp[j])
+				#print("Finished printing box")
 
 
-				sus_temp = box_grab(self.package(), int(i/27)*3 + (int(i/3)%3)+1)
-				for j in range(len(sus_temp)):
-					print(sus_temp[j], end = " ")
-				print(" ")
+				real_sus = missing(neighbor
+				if len(real_sus) == 1:
+					self.data[i] = real_sus[0]
 
-
-			print(" ")
-
+				#end of the if loop...
 
 
 class Squares:
@@ -154,9 +190,14 @@ class Squares:
 
 
 ###########TESTING############
+
+
 mat = [	0, 0, 4, 0, 0, 0, 0, 6, 0, 0, 0, 0, 0, 0, 5, 0, 0, 0, 0, 1, 9, 2, 0, 6, 8, 0, 0, 0, 6, 0, 0, 7, 8, 0, 5, 9, 5, 0, 0, 0, 3, 0, 0, 0, 2, 1, 3, 0, 5, 9, 0, 0, 8, 0, 0, 0, 5, 7, 0, 1, 6, 4, 0, 0, 0, 0, 8, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 5, 0, 0]
 g = Grid(mat)
 #row_print(g.package(), 5)
-
 mat_print(g.package())
-g.suslist()
+
+#while(g.g_sum() < 404):
+#	g.suslist()
+#	print(g.g_sum())
+#	mat_print(g.package())
