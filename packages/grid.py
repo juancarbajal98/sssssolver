@@ -81,4 +81,4 @@ class Grid:
                         if(self.squares[i].stripTzone()[k]==j):
                             self.squares[i].trimSuspect(j)
         # update # of unsolved
-        self.unsolvedCount = self.setUnsolvedCount(self.squares)
+        self.unsolvedCount = self.setUnsolvedCount(self.squares) kldj
